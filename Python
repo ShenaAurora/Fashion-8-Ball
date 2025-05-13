@@ -1,0 +1,51 @@
+import tkinter as tk
+import random as rd
+
+# Mapping messages
+messages = [
+    "Hmm, Let's start with a TOP!",
+    "Looks like we're starting with a BOTTOM!",
+    "Let's start from the SHOES!",
+    "Grab a random ACCESSORY!",
+    "Let your HAIRSTYLE be the muse!",
+    "I say start with a BAG!",
+    "We’re doing OUTERWEAR, you heard me!",
+    "Grab your most Bold STATEMENT PIECE!"
+]
+
+# Function of handle "Shake"
+def shake():
+    chosen = rd.choice(messages)
+    result_label.config(text=chosen, fg="black")
+    done_button.pack(pady=5)
+
+# Function of handle "Done"
+def done():
+    result_label.config(text="Now let’s go create a Masterpiece!", fg="white")
+    done_button.pack_forget()
+    shake_button.pack_forget()
+    root.after(5000, reset)  # Return to home screen after 5 seconds
+
+# Reset to home message
+def reset():
+    result_label.config(text=home_message, fg="black")
+
+# App window dynamic
+root = tk.Tk()
+root.title("The Sew Edit: Magic style 8-Ball")
+root.geometry("450x400")
+root.config(bg="light pink")
+
+# Home message
+home_message = "Shake to decide! What will the foundation of your fit be today?"
+result_label = tk.Label(root, text=home_message, wraplength=400, font=("Helvetica", 14), bg="light pink")
+result_label.pack(pady=30)
+
+# Buttons
+shake_button = tk.Button(root, text="Shake", fg= "white", command=shake, bg="hot pink", font=("Helvetica", 12))
+shake_button.pack(pady=10)
+
+done_button = tk.Button(root, text="Done", fg= "white", command=done, bg="black", font=("Helvetica", 12))
+
+
+root.mainloop()
